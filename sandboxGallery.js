@@ -2,10 +2,13 @@
 "use strict";
 console.log('SCRIPT: Creating and loading Sandbox Gallery  JS library')
 
-function GalleryGenerator() {
-    this.numPhoto = 0
-    this.templates = null
-    this.photos = []
+// photo = {
+//     photoName: {photoPath, caption, time}
+// }
+function GalleryGenerator(photos, template) {
+    this.numPhoto = photos.length()
+    this.template = template
+    this.photos = photos
 }
 
 GalleryGenerator.prototype = {
@@ -19,25 +22,32 @@ GalleryGenerator.prototype = {
 		body.append(gallery);
     },
 
+    // parameter = array of image?
+    setImage: function() {
+
+    },
     
     // parameter = image: (imageName, imagePath, caption)
     addImage: function() {
 
     },
 
-    // parameter = array of image?
-    setImage: function() {
-
-    },
-
-    // parameter = image: (imageName, newcaption)
-    updateCaption: function() {
+    // parameter = image: (imageName, newcaption, time)
+    editPhoto: function() {
 
     },
 
     // parameter = templateName
-    setTemplate: function() {
+    changeTemplate: function() {
 
     },
 
+    showTemplate: function() {
+
+    },
+
+    // Set style to template 1
+    template1: function() {
+
+    }
 }
