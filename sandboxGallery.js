@@ -6,7 +6,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery  JS library')
 //     photoName: {photoPath, caption, time}
 // }
 function GalleryGenerator(photos, template) {
-    this.numPhoto = photos.length()
+    this.numPhoto = photos.length
     this.template = template
     this.photos = photos
 }
@@ -16,7 +16,7 @@ GalleryGenerator.prototype = {
     makeGallery: function() {
         const gallery = document.createElement('div');
         gallery.id = "sandboxgallery";
-        gallery.style.cssText = 'display: none';
+        gallery.style.cssText = 'width:40px; height: 40px; background-color: Aqua;';
         
         const body = $('body');
 		body.append(gallery);
@@ -32,6 +32,11 @@ GalleryGenerator.prototype = {
 
     },
 
+    // parameter = image: (imageName)
+    deleteImage: function() {
+
+    },
+
     // parameter = image: (imageName, newcaption, time)
     editPhoto: function() {
 
@@ -43,7 +48,10 @@ GalleryGenerator.prototype = {
     },
 
     showTemplate: function() {
-
+        const gallery = document.getElementById('sandboxgallery');
+        if (gallery) {
+            gallery.style = 'display: block';
+        }
     },
 
     // Set style to template 1
