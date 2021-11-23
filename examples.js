@@ -18,17 +18,17 @@ photoList = [
 ]
 
 const gallery = new GalleryGenerator('default', true, true);
-gallery.makeGallery(photoList.slice(0, 16));
+gallery.makeGallery(photoList.slice(3, 10));
 
 function templateDefault() {
     // gallery.makeGallery(photoList.slice(0, 16));
     gallery.setTemplate('default');
-    gallery.makeGallery(photoList.slice(0 ,16));
+    gallery.makeGallery(photoList.slice(3,10));
 }
 
 function templateMosaic() {
     gallery.setTemplate('mosaic');
-    gallery.makeGallery(photoList.slice(5,12));
+    gallery.makeGallery(photoList.slice(5,16));
 }
 
 function templateGrid() {
@@ -38,5 +38,5 @@ function templateGrid() {
 
 function templateMansonry() {
     gallery.setTemplate('mansonry');
-    gallery.makeGallery(photoList.slice(0 ,4));
+    gallery.makeGallery(photoList.slice(0,11));
 }

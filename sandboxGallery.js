@@ -1,53 +1,81 @@
 /* JS Libraries */
 "use strict";
-console.log('SCRIPT: Creating and loading Sandbox Gallery  JS library')
+console.log('SCRIPT: Creating and loading Sandbox Gallery JS library')
 
-function GalleryGenerator(template, caption, date) {
+function GalleryGenerator(template) {
     this.photos = []
     this.template = template
-    this.caption = caption
-    this.date = date
+    this.caption = false
+    this.date = false
 }
 
 GalleryGenerator.prototype = {
 
     makeGallery: function(photoList) {
+        const head = document.getElementsByTagName('HEAD')[0]; 
+        const link = document.createElement('link');
+        link.rel = 'stylesheet'; 
+        link.type = 'text/css';
+        link.href = 'sandboxGallery.css'; 
+        head.appendChild(link); 
+
+        const prev_gallery = document.getElementById('sandboxgallery');
+        if (prev_gallery !== null) {
+            prev_gallery.remove();
+        }
         const gallery = document.createElement('div');
         const photos_container = document.createElement('div');
         photos_container.id = "photos_container";
         gallery.id = 'sandboxgallery';
-        gallery.style.cssText = 'width: 100%; height: 100%; margin: auto;'
-
-        // gallery.style.cssText = 'width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap; margin-left: 1.5%;';
-        // gallery.style.cssText = 'width: 800px; display: flex; justify-content: space-between; flex-wrap: wrap; margin-left: auto; margin-right: auto;';
 
         const body = $('body');
 		body.append(gallery);
         gallery.append(photos_container);
-        this.setImage(photoList);
-        if (this.caption) {
-            this.showCaption();
-        }
 
-        if (this.date) {
-            this.showDate();
-        }
-        console.log(this.template);
         if (this.template === 'mosaic') {
+            this.caption = false;
+            this.date = false;
+            this.setImageMosaicMansonry(photoList);
+            this.setCaptionorDate();
             this.templateMosaic();
         }
         else if (this.template === 'grid') {
+            this.caption = true;
+            this.date = true;
+            this.setImageDefaultGrid(photoList);
+            this.setCaptionorDate();
             this.templateGrid();
         }
-        else if (this.template === 'monsonry') {
+        else if (this.template === 'mansonry') {
+            this.caption = false;
+            this.date = false;
+            this.setImageMosaicMansonry(photoList);
+            this.setCaptionorDate();
             this.templateMansonry();
         }
         else {
+            this.caption = true;
+            this.date = false;
+            this.setImageDefaultGrid(photoList);
+            this.setCaptionorDate();
             this.templateDefault();
         }
     },
 
-    setImage: function(photoList) {
+    setCaptionorDate: function() {
+        if (this.caption) {
+            this.showCaption();
+        }
+        if (this.date) {
+            this.showDate();
+        }
+    },
+
+    setTemplate: function(templateName) {
+        this.template = templateName;
+    },
+
+    setImageDefaultGrid: function(photoList) {
         this.photos = photoList;
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
@@ -63,6 +91,44 @@ GalleryGenerator.prototype = {
             div.style.cssText = 'width: 350px; height: 350px'
             img.style.cssText = 'width: 350px';
             photos_container.appendChild(div);
+            a_tag.append(img);
+            div.append(a_tag);
+        });
+    },
+
+    setImageMosaicMansonry: function(photoList) {
+        this.photos = photoList;
+
+        const gallery = document.getElementById('sandboxgallery');
+        const photos_container = gallery.children[0];
+        photos_container.querySelectorAll('*').forEach(n => n.remove());
+
+        const container = document.createElement('div');
+        if (this.template === 'mosaic') {
+            container.className = 'image-mosaic';
+        }
+        else {
+            container.className = 'image-mansonry';
+        }
+
+        photos_container.appendChild(container);
+
+        this.photos.map(photo => {
+            const div = document.createElement('div');
+            const a_tag = document.createElement('a');
+            const img = document.createElement('img');
+            a_tag.href = photo.path;
+            if (this.template === 'mosaic') {
+                div.className = 'mosaic_card';
+            }
+            else {
+                div.className = 'mansonry_card';
+            }
+            div.id = photo.name;
+            img.id = photo.name + '_img';
+            img.src = photo.path;
+            img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+            container.appendChild(div);
             a_tag.append(img);
             div.append(a_tag);
         });
@@ -103,18 +169,6 @@ GalleryGenerator.prototype = {
 
     },
 
-    // parameter = templateName
-    setTemplate: function(templateName) {
-        this.template = templateName;
-    },
-
-    showTemplate: function() {
-        const gallery = document.getElementById('sandboxgallery');
-        if (gallery) {
-            gallery.style = 'display: block';
-        }
-    },
-
     templateDefault: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
@@ -144,7 +198,7 @@ GalleryGenerator.prototype = {
     templateMosaic: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
-        photos_container.style.cssText = 'width: 100%; display: flex; flex-wrap: wrap;';
+        photos_container.style.cssText = 'width: 100%; height: 100%; margin: auto;';
         console.log('template mosaic');
     },
 
@@ -175,6 +229,16 @@ GalleryGenerator.prototype = {
     },
 
     templateMansonry: function() {
+        const gallery = document.getElementById('sandboxgallery');
+        const photos_container = gallery.children[0];
+        photos_container.style.cssText = 'width: 100%; height: 100%; margin: auto;';
+
+        const cards = document.getElementsByClassName('mansonry_card');
+        for (let i = 0; i < cards.length; i++) {
+            console.log(cards[i]);
+            cards[i].style.cssText = 'grid-column: span 2;'
+        }
+
         console.log('template mansonry');
     }
 }
