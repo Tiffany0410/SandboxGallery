@@ -1,30 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>SandboxGallery JS Library</title>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <title>SandboxGallery JS Library</title>
 
-    <link rel="stylesheet" type="text/css" href="examples.css">
+      <link rel="stylesheet" type="text/css" href="examples.css">
 
-    <!-- 'defer' states that the script should be executed after the HTML is parsed.
+      <!-- 'defer' states that the script should be executed after the HTML is parsed.
          If multiple scripts have 'defer', they are loaded one after the other.  
          This will guarantee execution order, and ensure that scripts that depend on each other load
          in an order that will not cause errors. -->
-    <!-- First we load jquery from a Google CDN (content delivery network). -->
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Then we load a script that depends on jQuery -->
-    <script defer type="text/javascript" src='sandboxGallery.js'></script>
-    <!-- Then we load a script that depends on our libraries (and jQuery) -->
-    <script defer type="text/javascript" src='examples.js'></script>
+      <!-- First we load jquery from a Google CDN (content delivery network). -->
+      <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <!-- Then we load a script that depends on jQuery -->
+      <script defer type="text/javascript" src='sandboxGallery.js'></script>
+      <!-- Then we load a script that depends on our libraries (and jQuery) -->
+      <script defer type="text/javascript" src='examples.js'></script>
 
 
- </head>
- <body>
-
- 	<div id='myId'>Here's some text</div>
-
- </body>
+   </head>
+   <body>
+      <div class='header-container'>
+         <div class='logo'>
+            <h2>Sandbox Gallery Demo</h2>
+         </div>
+         <div class='navbar'>
+            <div>
+               <a onclick="templateMosaic()"><h4>Mosaic</h4></a>
+            </div>
+            <div>
+               <a onclick="templateGrid()"><h4>Grid</h4></a>
+            </div>
+            <div>
+               <a onclick="templateMansonry()"><h4>Mansonry</h4></a>
+            </div>
+         </div>
+      </div>
+   </body>
 
 </html>
