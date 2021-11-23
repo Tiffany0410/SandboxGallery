@@ -5,34 +5,45 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery  JS library')
 // photo = {
 //     photoName: {photoPath, caption, time}
 // }
-function GalleryGenerator(photos, template) {
-    this.numPhoto = photos.length
+function GalleryGenerator(template, caption, date) {
+    this.photos = []
     this.template = template
-    this.photos = photos
+    this.caption = caption
+    this.date = date
 }
 
 GalleryGenerator.prototype = {
 
-    makeGallery: function() {
+    makeGallery: function(photoList) {
         const gallery = document.createElement('div');
         gallery.id = 'sandboxgallery';
-        gallery.style.cssText = 'width:40px; height: 40px; background-color: Aqua;';
+        // gallery.style.cssText = 'width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap; margin-left: 1.5%;';
+        // gallery.style.cssText = 'width: 800px; display: flex; justify-content: space-between; flex-wrap: wrap; margin-left: auto; margin-right: auto;';
 
         const body = $('body');
 		body.append(gallery);
-        this.setImage();
+        this.setImage(photoList);
+        if (this.caption) {
+            this.showCaption();
+        }
+        if (this.date) {
+            this.showDate();
+        }
+        this.setTemplate(this.template);
     },
 
-    // parameter = array of image?
-    setImage: function() {
+    setImage: function(photoList) {
+        this.photos = photoList;
         const gallery = document.getElementById('sandboxgallery');
+        gallery.querySelectorAll('*').forEach(n => n.remove());
         this.photos.map(photo => {
             const div = document.createElement('div');
             const img = document.createElement('img');
             div.id = photo.name;
+            img.id = photo.name + '_img';
             img.src = photo.path;
-            div.style.cssText = 'width: 350px;'
-            img.style.cssText = 'height: 350px';
+            div.style.cssText = 'width: 350px; height: 350px'
+            img.style.cssText = 'width: 350px';
             gallery.appendChild(div);
             div.append(img);
         });
@@ -42,10 +53,9 @@ GalleryGenerator.prototype = {
         this.photos.map(photo => {
             const img_div = document.getElementById(photo.name);
             const caption = document.createElement('span');
-            caption.style.cssText = 'display: block; color: blue; width: 100%;'
             caption.innerHTML = photo.caption;
+            caption.id = photo.name + '_caption';
             img_div.append(caption);
-            console.log(photo.caption);
         });
     },
 
@@ -53,10 +63,9 @@ GalleryGenerator.prototype = {
         this.photos.map(photo => {
             const img_div = document.getElementById(photo.name);
             const date = document.createElement('span');
-            date.style.cssText = 'display: block; color: red; width: 100%;'
             date.innerHTML = photo.date;
+            date.id = photo.name + '_date';
             img_div.append(date);
-            console.log(photo.date);
         });
     },
     
@@ -76,8 +85,20 @@ GalleryGenerator.prototype = {
     },
 
     // parameter = templateName
-    changeTemplate: function() {
-
+    setTemplate: function(templateName) {
+        this.templates = templateName;
+        if (templateName === 'mosaic') {
+            this.templateMosaic();
+        }
+        else if (templateName === 'grid') {
+            this.templateGrid();
+        }
+        else if (templateName === 'monsonry') {
+            this.templateMansonry();
+        }
+        else {
+            this.templateDefault();
+        }
     },
 
     showTemplate: function() {
@@ -87,7 +108,34 @@ GalleryGenerator.prototype = {
         }
     },
 
+    templateDefault: function() {
+        const gallery = document.getElementById('sandboxgallery');
+        gallery.style.cssText = 'width: 800px; display: flex; justify-content: space-between; flex-wrap: wrap; margin-left: auto; margin-right: auto;';
+
+        this.photos.map(photo => {
+            const div = document.getElementById(photo.name);
+            const img = document.getElementById(photo.name + '_img');
+            const caption = document.getElementById(photo.name + '_caption');
+            const date = document.getElementById(photo.name + '_date');
+            // if (div) {
+            //     div.style.cssText = 'background-color: pink;'
+            // }
+            if (img) {
+                img.style.cssText = 'width: 350px; border-radius: 10%;'
+            }
+            if (caption) {
+                caption.style.cssText = 'display: block; width: 100%; color: gray; letter-spacing: 1px; text-align: right; font-size: 15px; font-weight: 400;';
+            }
+            if (date) {
+                date.style.cssText = 'display: block; width: 100%; color: darkgray; letter-spacing: 1px; text-align: right; font-size: 10px; font-weight: 200;';
+            }      
+        })
+        console.log('template default');
+    },
+
     templateMosaic: function() {
+        const gallery = document.getElementById('sandboxgallery');
+        gallery.style.cssText = 'width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap;';
         console.log('template mosaic');
     },
 
