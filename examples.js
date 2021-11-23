@@ -17,26 +17,27 @@ photoList = [
     {name: "photo15", path: 'photos/a15.jpg', caption: 'Black & White Film', date: 'January 2019'},
 ]
 
-const gallery = new GalleryGenerator('default', true, true);
-gallery.makeGallery(photoList.slice(3, 10));
+// Default showing default gallery template:
+const default_gallery = new GalleryGenerator('default');
+default_gallery.makeGallery(photoList.slice(3, 10));
+
 
 function templateDefault() {
-    // gallery.makeGallery(photoList.slice(0, 16));
-    gallery.setTemplate('default');
-    gallery.makeGallery(photoList.slice(3,10));
+    const default_gallery = new GalleryGenerator('default');
+    default_gallery.makeGallery(photoList.slice(3,10));
 }
 
 function templateMosaic() {
-    gallery.setTemplate('mosaic');
-    gallery.makeGallery(photoList.slice(5,16));
+    const mosaic_gallery = new GalleryGenerator('mosaic');
+    mosaic_gallery.makeGallery(photoList.slice(5,16));
 }
 
 function templateGrid() {
-    gallery.setTemplate('grid');
-    gallery.makeGallery(photoList.slice(0 ,4));
+    const grid_gallery = new GalleryGenerator('grid');
+    grid_gallery.makeGallery(photoList.slice(0 ,4));
 }
 
 function templateMansonry() {
-    gallery.setTemplate('mansonry');
-    gallery.makeGallery(photoList.slice(0,11));
+    const mansonry_gallery = new GalleryGenerator('mansonry');
+    mansonry_gallery.makeGallery(photoList.slice(0,11));
 }
