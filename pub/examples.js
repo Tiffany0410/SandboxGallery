@@ -37,7 +37,7 @@ function templateGrid() {
     grid_gallery.makeGallery(photoList.slice(0 ,4));
 }
 
-function templatemasonry() {
+function templateMasonry() {
     const masonry_gallery = new GalleryGenerator('masonry');
     masonry_gallery.makeGallery(photoList.slice(0,11));
 }

@@ -47,7 +47,7 @@ GalleryGenerator.prototype = {
         if (this.template === 'mosaic') {
             this.caption = false;
             this.date = false;
-            this.setImageMosaicmasonry(photoList);
+            this.setImageMosaicMasonry(photoList);
             this.setCaptionorDate();
             this.templateMosaic();
         }
@@ -61,9 +61,9 @@ GalleryGenerator.prototype = {
         else if (this.template === 'masonry') {
             this.caption = false;
             this.date = false;
-            this.setImageMosaicmasonry(photoList);
+            this.setImageMosaicMasonry(photoList);
             this.setCaptionorDate();
-            this.templatemasonry();
+            this.templateMasonry();
         }
         else {
             this.caption = true;
@@ -125,7 +125,7 @@ GalleryGenerator.prototype = {
     /* 
         Add images to gallery for mosaic / masonry template
     */
-    setImageMosaicmasonry: function(photoList) {
+    setImageMosaicMasonry: function(photoList) {
         this.photos = photoList;
 
         const gallery = document.getElementById('sandboxgallery');
@@ -299,7 +299,7 @@ GalleryGenerator.prototype = {
     /* 
         Modify style for masonry template
     */
-    templatemasonry: function() {
+    templateMasonry: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
         photos_container.style.cssText = 'width: 100%; height: 100%; margin: auto;';
