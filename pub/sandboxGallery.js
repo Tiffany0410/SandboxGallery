@@ -5,7 +5,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library')
 /* 
     Generates a Gallery
 
-    @param template: describes which template is in used {default, mosaic, grid, mansonry}
+    @param template: describes which template is in used {default, mosaic, grid, masonry}
 */
 function GalleryGenerator(template) {
     this.photos = []
@@ -47,7 +47,7 @@ GalleryGenerator.prototype = {
         if (this.template === 'mosaic') {
             this.caption = false;
             this.date = false;
-            this.setImageMosaicMansonry(photoList);
+            this.setImageMosaicmasonry(photoList);
             this.setCaptionorDate();
             this.templateMosaic();
         }
@@ -58,12 +58,12 @@ GalleryGenerator.prototype = {
             this.setCaptionorDate();
             this.templateGrid();
         }
-        else if (this.template === 'mansonry') {
+        else if (this.template === 'masonry') {
             this.caption = false;
             this.date = false;
-            this.setImageMosaicMansonry(photoList);
+            this.setImageMosaicmasonry(photoList);
             this.setCaptionorDate();
-            this.templateMansonry();
+            this.templatemasonry();
         }
         else {
             this.caption = true;
@@ -123,9 +123,9 @@ GalleryGenerator.prototype = {
     },
 
     /* 
-        Add images to gallery for mosaic / mansonry template
+        Add images to gallery for mosaic / masonry template
     */
-    setImageMosaicMansonry: function(photoList) {
+    setImageMosaicmasonry: function(photoList) {
         this.photos = photoList;
 
         const gallery = document.getElementById('sandboxgallery');
@@ -142,7 +142,7 @@ GalleryGenerator.prototype = {
             container.className = 'image-mosaic';
         }
         else {
-            container.className = 'image-mansonry';
+            container.className = 'image-masonry';
         }
 
         photos_container.appendChild(container);
@@ -161,7 +161,7 @@ GalleryGenerator.prototype = {
                 div.className = 'mosaic_card';
             }
             else {
-                div.className = 'mansonry_card';
+                div.className = 'masonry_card';
             }
             div.id = photo.name;
             img.className = 'images-class';
@@ -297,17 +297,17 @@ GalleryGenerator.prototype = {
     },
 
     /* 
-        Modify style for mansonry template
+        Modify style for masonry template
     */
-    templateMansonry: function() {
+    templatemasonry: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
         photos_container.style.cssText = 'width: 100%; height: 100%; margin: auto;';
 
-        const cards = document.getElementsByClassName('mansonry_card');
+        const cards = document.getElementsByClassName('masonry_card');
         for (let i = 0; i < cards.length; i++) {
             cards[i].style.cssText = 'grid-column: span 2;'
         }
-        console.log('template mansonry');
+        console.log('template masonry');
     }
 }

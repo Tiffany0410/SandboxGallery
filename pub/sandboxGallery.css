@@ -15,13 +15,13 @@
 	-webkit-transform: scale(0.9);
 	transform: scale(0.9);
 }
-.image-mansonry {
+.image-masonry {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-gap: 0.5rem;
 }
 
-.mansonry_card:nth-child(1) {
+.masonry_card:nth-child(1) {
     grid-row: span 2;
 }
 
