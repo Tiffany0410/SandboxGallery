@@ -1,11 +1,20 @@
 h2 {
     text-align: center;
+    font-family: fantasy;
+}
+
+h5 {
+    letter-spacing: 1.8px;
+    text-align: center;
+    font-weight: 100;
 }
 
 .header-container{
     width: 100%;
-    height: 180px;
+    height: 350px;
     background: #ffffff;
+    margin-bottom: 50px;
+    
 }
 
 .navbar{
@@ -37,4 +46,66 @@ h2 {
     color: #34647e;
     font-weight: 300;
     letter-spacing: 12px;
+}
+
+.link {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    width: 50px;
+    text-align: center;
+    align-items: center;
+    border: solid 1px;
+    padding: 0.5em 1em;
+    text-transform: uppercase;
+    font-weight: 200;
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+.link-text {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+.template-description {
+    margin-left: auto;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.hover-menu {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+span {
+    letter-spacing: 1.8px;
+    text-align: center;
+    font-weight: blod;
+    font-size: 14px;
+}
+
+button {
+  background-color: rgba(51, 51, 51, 0.05);
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }

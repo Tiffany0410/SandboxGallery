@@ -1,4 +1,8 @@
-photoList = [
+"use strict"; 
+
+var template = "default";
+
+const photoList = [
     {name: "photo", path: 'photos/a.jpg', caption: 'Los Angeles', date: 'December 2018'},
     {name: "photo1", path: 'photos/a1.jpg', caption: 'Sunset and Tree', date: 'December 2018'},
     {name: "photo2", path: 'photos/a2.jpg', caption: 'Lantern Man', date: 'December 2018'},
@@ -15,29 +19,74 @@ photoList = [
     {name: "photo13", path: 'photos/a13.jpg', caption: 'Black & White Film', date: 'January 2019'},
     {name: "photo14", path: 'photos/a14.jpg', caption: 'Black & White Film', date: 'January 2019'},
     {name: "photo15", path: 'photos/a15.jpg', caption: 'Black & White Film', date: 'January 2019'},
-]
+];
 
-// Default showing default gallery template:
-const default_gallery = new GalleryGenerator('default');
-default_gallery.makeGallery(photoList.slice(3, 10));
+function templateDefault(hover, fullscreen) {
+    template = "default";
+    const default_gallery = new GalleryGenerator('default', photoList.slice(1,15), true, true, hover, fullscreen);
+    default_gallery.makeGallery();
+    const div = document.getElementsByClassName('template-description');
+    const h5 = div[0].children[0];
+    h5.innerText = 'Default Template: Here all thumbnails have the same size and aligned horizontally'
+    console.log(template);
+};
 
+function templateMosaic(hover, fullscreen) {
+    template = "mosaic";
+    const mosaic_gallery = new GalleryGenerator('mosaic', photoList.slice(0, 12), false, false, hover, fullscreen);
+    mosaic_gallery.makeGallery();
+    const div = document.getElementsByClassName('template-description');
+    const h5 = div[0].children[0];
+    h5.innerText = 'Mosaic Template: Here all thumbnails are placed in nice responsive justified grid in mosaic style.'
+    console.log(template);
+};
 
-function templateDefault() {
-    const default_gallery = new GalleryGenerator('default');
-    default_gallery.makeGallery(photoList.slice(3,10));
+function templateGrid(hover, fullscreen) {
+    template = "grid";
+    const grid_gallery = new GalleryGenerator('grid', photoList.slice(0 ,6), true, true, hover, fullscreen);
+    grid_gallery.makeGallery();
+    const div = document.getElementsByClassName('template-description');
+    const h5 = div[0].children[0];
+    h5.innerText = 'Grid Template: Here all thumbnails have the same size in this grid layout.'
+    console.log(template);
+};
+
+function templateMasonry(hover, fullscreen) {
+    template = "masonry";
+    const masonry_gallery = new GalleryGenerator('masonry', photoList.slice(0,11), false, false, hover, fullscreen);
+    masonry_gallery.makeGallery();
+    const div = document.getElementsByClassName('template-description');
+    const h5 = div[0].children[0];
+    h5.innerText = 'Masonry Template: Here all thumbnails are placed in nice responsive justified grid in masonry style (layout based on columns)'
+    console.log(template);
+};
+
+function templateAlbum(hover, fullscreen) {
+    template = "album";
+    const album_gallery = new GalleryGenerator('album', photoList.slice(7,13), true, false, hover, fullscreen);
+    album_gallery.makeGallery();
+    const div = document.getElementsByClassName('template-description');
+    const h5 = div[0].children[0];
+    h5.innerText = 'Album Template: Here all thumbnails have the same size in this grid layout, with caption on the right'
+    console.log(template);
 }
 
-function templateMosaic() {
-    const mosaic_gallery = new GalleryGenerator('mosaic');
-    mosaic_gallery.makeGallery(photoList.slice(5,16));
+function changeHover(hover) {
+    if (template === 'default') {
+        templateDefault(hover, true)
+    }
+    else if (template === 'mosaic') {
+        templateMosaic(hover, true)
+    }
+    else if (template === 'grid') {
+        templateGrid(hover, true)
+    }
+    else if (template === 'masonry') {
+        templateMasonry(hover, true)
+    }
+    else {
+        templateAlbum(hover, true)
+    }
 }
 
-function templateGrid() {
-    const grid_gallery = new GalleryGenerator('grid');
-    grid_gallery.makeGallery(photoList.slice(0 ,4));
-}
-
-function templateMasonry() {
-    const masonry_gallery = new GalleryGenerator('masonry');
-    masonry_gallery.makeGallery(photoList.slice(0,11));
-}
+templateDefault('shrink', true);

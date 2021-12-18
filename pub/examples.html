@@ -18,19 +18,51 @@
          <div class='logo'>
             <h2>Sandbox Gallery Demo</h2>
          </div>
+         <div class='description'>
+            <h5>SandboxGallery is the tool of choice for developers to create beautiful galleries with eye-catching templates and hover effects for the web</h5>
+         </div>
+         <div class='link'>
+            <a class='link-text' href='./api.html'>
+               API
+            </a>
+         </div>
          <div class='navbar'>
             <div>
-               <a onclick="templateDefault()"><h4>Default</h4></a>
+               <a onclick="templateDefault('shrink', true)"><h4>Default</h4></a>
             </div>
             <div>
-               <a onclick="templateMosaic()"><h4>Mosaic</h4></a>
+               <a onclick="templateMosaic('shrink', true)"><h4>Mosaic</h4></a>
             </div>
             <div>
-               <a onclick="templateGrid()"><h4>Grid</h4></a>
+               <a onclick="templateGrid('shrink', true)"><h4>Grid</h4></a>
             </div>
             <div>
-               <a onclick="templateMasonry()"><h4>Masonry</h4></a>
+               <a onclick="templateMasonry('shrink', true)"><h4>Masonry</h4></a>
             </div>
+            <div>
+               <a onclick="templateAlbum('shrink', true)"><h4>Album</h4></a>
+            </div>
+         </div>
+         <div class='template-description'>
+            <h5>Default Template: Here all thumbnails have the same size and aligned horizontally</h5>
+         </div>
+         <div class='hover-menu'>
+            <span>Hover effects:</span>
+            <button class="button-51" onclick="changeHover('shrink')">
+               Shrink
+            </button>
+            <button class="button-51" onclick="changeHover('grow')">
+               Grow
+            </button>
+            <button class="button-51" onclick="changeHover('fade')">
+               Fade
+            </button>            
+            <button class="button-51" onclick="changeHover('border')">
+               Border
+            </button>            
+            <button class="button-51" onclick="changeHover('blur')">
+               Blur
+            </button>
          </div>
       </div>
    </body>
