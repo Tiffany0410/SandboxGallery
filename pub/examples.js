@@ -23,53 +23,52 @@ const photoList = [
     {name: "photo15", path: 'photos/a15.jpg', caption: 'Black & White Film', date: 'January 2019'},
 ];
 
-function templateDefault(hover) {
+function templateDefault() {
     template = "default";
-    const default_gallery = new GalleryGenerator('default', photoList.slice(1,15), true, true, hover, fullscreen_view);
+    const default_gallery = new GalleryGenerator('default', photoList.slice(1,15), true, true, hover_effect, fullscreen_view);
     default_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Default Template: Here all thumbnails have the same size and aligned horizontally'
 };
 
-function templateMosaic(hover) {
+function templateMosaic() {
     template = "mosaic";
-    const mosaic_gallery = new GalleryGenerator('mosaic', photoList.slice(0, 12), false, false, hover, fullscreen_view);
+    const mosaic_gallery = new GalleryGenerator('mosaic', photoList.slice(0, 12), false, false, hover_effect, fullscreen_view);
     mosaic_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Mosaic Template: Here all thumbnails are placed in nice responsive justified grid in mosaic style'
 };
 
-function templateGrid(hover) {
+function templateGrid() {
     template = "grid";
-    const grid_gallery = new GalleryGenerator('grid', photoList.slice(0 ,6), true, true, hover, fullscreen_view);
+    const grid_gallery = new GalleryGenerator('grid', photoList.slice(0 ,6), true, true, hover_effect, fullscreen_view);
     grid_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Grid Template: Here all thumbnails have the same size in this grid layout'
 };
 
-function templateMasonry(hover) {
+function templateMasonry() {
     template = "masonry";
-    const masonry_gallery = new GalleryGenerator('masonry', photoList.slice(0,11), false, false, hover, fullscreen_view);
+    const masonry_gallery = new GalleryGenerator('masonry', photoList.slice(0,11), false, false, hover_effect, fullscreen_view);
     masonry_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Masonry Template: Here all thumbnails are placed in nice responsive justified grid in masonry style (layout based on columns)'
 };
 
-function templateAlbum(hover) {
+function templateAlbum() {
     template = "album";
-    const album_gallery = new GalleryGenerator('album', photoList.slice(7,13), true, false, hover, fullscreen_view);
+    const album_gallery = new GalleryGenerator('album', photoList.slice(7,13), true, false, hover_effect, fullscreen_view);
     album_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Album Template: Here all thumbnails have the same size in this grid layout, with caption on the right'
 }
 
-function enableFullscreen(enable) {
-    fullscreen_view = enable
+function setTemplate() {
     if (template === 'default') {
         templateDefault(hover_effect)
     }
@@ -86,24 +85,14 @@ function enableFullscreen(enable) {
         templateAlbum(hover_effect)
     }
 }
+function enableFullscreen(enable) {
+    fullscreen_view = enable
+    setTemplate()
+}
 
 function changeHover(hover) {
     hover_effect = hover
-    if (template === 'default') {
-        templateDefault(hover)
-    }
-    else if (template === 'mosaic') {
-        templateMosaic(hover)
-    }
-    else if (template === 'grid') {
-        templateGrid(hover)
-    }
-    else if (template === 'masonry') {
-        templateMasonry(hover)
-    }
-    else {
-        templateAlbum(hover)
-    }
+    setTemplate()
 }
 
-templateDefault('shrink', true);
+setTemplate()
