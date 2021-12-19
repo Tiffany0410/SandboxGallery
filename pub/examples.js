@@ -1,6 +1,8 @@
 "use strict"; 
 
 var template = "default";
+var hover_effect = "shrink"
+var fullscreen_view = true
 
 const photoList = [
     {name: "photo", path: 'photos/a.jpg', caption: 'Los Angeles', date: 'December 2018'},
@@ -21,71 +23,86 @@ const photoList = [
     {name: "photo15", path: 'photos/a15.jpg', caption: 'Black & White Film', date: 'January 2019'},
 ];
 
-function templateDefault(hover, fullscreen) {
+function templateDefault(hover) {
     template = "default";
-    const default_gallery = new GalleryGenerator('default', photoList.slice(1,15), true, true, hover, fullscreen);
+    const default_gallery = new GalleryGenerator('default', photoList.slice(1,15), true, true, hover, fullscreen_view);
     default_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Default Template: Here all thumbnails have the same size and aligned horizontally'
-    console.log(template);
 };
 
-function templateMosaic(hover, fullscreen) {
+function templateMosaic(hover) {
     template = "mosaic";
-    const mosaic_gallery = new GalleryGenerator('mosaic', photoList.slice(0, 12), false, false, hover, fullscreen);
+    const mosaic_gallery = new GalleryGenerator('mosaic', photoList.slice(0, 12), false, false, hover, fullscreen_view);
     mosaic_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
-    h5.innerText = 'Mosaic Template: Here all thumbnails are placed in nice responsive justified grid in mosaic style.'
-    console.log(template);
+    h5.innerText = 'Mosaic Template: Here all thumbnails are placed in nice responsive justified grid in mosaic style'
 };
 
-function templateGrid(hover, fullscreen) {
+function templateGrid(hover) {
     template = "grid";
-    const grid_gallery = new GalleryGenerator('grid', photoList.slice(0 ,6), true, true, hover, fullscreen);
+    const grid_gallery = new GalleryGenerator('grid', photoList.slice(0 ,6), true, true, hover, fullscreen_view);
     grid_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
-    h5.innerText = 'Grid Template: Here all thumbnails have the same size in this grid layout.'
-    console.log(template);
+    h5.innerText = 'Grid Template: Here all thumbnails have the same size in this grid layout'
 };
 
-function templateMasonry(hover, fullscreen) {
+function templateMasonry(hover) {
     template = "masonry";
-    const masonry_gallery = new GalleryGenerator('masonry', photoList.slice(0,11), false, false, hover, fullscreen);
+    const masonry_gallery = new GalleryGenerator('masonry', photoList.slice(0,11), false, false, hover, fullscreen_view);
     masonry_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Masonry Template: Here all thumbnails are placed in nice responsive justified grid in masonry style (layout based on columns)'
-    console.log(template);
 };
 
-function templateAlbum(hover, fullscreen) {
+function templateAlbum(hover) {
     template = "album";
-    const album_gallery = new GalleryGenerator('album', photoList.slice(7,13), true, false, hover, fullscreen);
+    const album_gallery = new GalleryGenerator('album', photoList.slice(7,13), true, false, hover, fullscreen_view);
     album_gallery.makeGallery();
     const div = document.getElementsByClassName('template-description');
     const h5 = div[0].children[0];
     h5.innerText = 'Album Template: Here all thumbnails have the same size in this grid layout, with caption on the right'
-    console.log(template);
+}
+
+function enableFullscreen(enable) {
+    fullscreen_view = enable
+    if (template === 'default') {
+        templateDefault(hover_effect)
+    }
+    else if (template === 'mosaic') {
+        templateMosaic(hover_effect)
+    }
+    else if (template === 'grid') {
+        templateGrid(hover_effect)
+    }
+    else if (template === 'masonry') {
+        templateMasonry(hover_effect)
+    }
+    else {
+        templateAlbum(hover_effect)
+    }
 }
 
 function changeHover(hover) {
+    hover_effect = hover
     if (template === 'default') {
-        templateDefault(hover, true)
+        templateDefault(hover)
     }
     else if (template === 'mosaic') {
-        templateMosaic(hover, true)
+        templateMosaic(hover)
     }
     else if (template === 'grid') {
-        templateGrid(hover, true)
+        templateGrid(hover)
     }
     else if (template === 'masonry') {
-        templateMasonry(hover, true)
+        templateMasonry(hover)
     }
     else {
-        templateAlbum(hover, true)
+        templateAlbum(hover)
     }
 }
 

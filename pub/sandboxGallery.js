@@ -8,18 +8,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     @param template: describes which template is in used {default, mosaic, grid, masonry}
 */
 
-/* 
-Wrap the code that creates your library in an Immediately-Invoked function expression (IIFE).
-This allows you to do any setup necessary in this function scope and then only put on the
-the global scope the variables needed for developers to access.  Prevents pollution of the 
-global scope and conflicts with variables from other libraries, and gives some control over functionality access.
-*/
-
-// We use parameters to create *local* variables in the function, which are faster to lookup than globals, for performance.
-// We can also name them something else - like `global` for the window object.
 (function(global, document, $) { 
-
-	// this function is currently only in the scope of the anonymous function at the moment.
 	function GalleryGenerator(template, photos, caption, date, hover, fullscreen) {
         this.photos = photos
         this.template = template
@@ -28,16 +17,6 @@ global scope and conflicts with variables from other libraries, and gives some c
         this.hover = hover
         this.fullscreen = fullscreen
 	}
-
-	/* Private properties and functions */
-	// unless we attach these to the global window object, they cannot be accessed directly.
-	// they will only be in the closure of this function, and can be accessed only the places we use them (such as in the functions of the CircleGenerator prototype)
-		// (see examples.js for what we can and cannot access)
-	let _totalNumberOfPhotosCreated = 0
-	function _incrementTotalPhotos() {
-		_totalNumberOfPhotosCreated++;
-	}
-	/* End of private properties/functions */
 
 	GalleryGenerator.prototype = {
     /* 
@@ -112,10 +91,6 @@ global scope and conflicts with variables from other libraries, and gives some c
         }
     },
 
-    setTemplate: function(templateName) {
-        this.template = templateName;
-    },
-
     /* 
         Add images to gallery for default / grid template
     */
@@ -147,7 +122,7 @@ global scope and conflicts with variables from other libraries, and gives some c
             }
             div.id = photo.name;
             div.className = 'default-card';
-            this._hover(img);
+            this.setHover(img);
             img.id = photo.name + '_img';
             img.src = photo.path;
             div.style.cssText = 'width: 350px; height: 350px;'
@@ -230,7 +205,7 @@ global scope and conflicts with variables from other libraries, and gives some c
                 div.className = 'masonry_card';
             }
             div.id = photo.name;
-            this._hover(img);
+            this.setHover(img);
             img.id = photo.name + '_img';
             img.src = photo.path;
             img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
@@ -240,7 +215,10 @@ global scope and conflicts with variables from other libraries, and gives some c
         });
     },
 
-    _hover: function(img) {
+    /* 
+        Set hover effect for img
+    */
+    setHover: function(img) {
         if (this.hover === "shrink") {
             img.className = 'images-class-shrink';
         }
@@ -344,7 +322,6 @@ global scope and conflicts with variables from other libraries, and gives some c
         console.log('template default');
     },
 
-
     /* 
         Modify style for mosaic template
     */
@@ -372,7 +349,7 @@ global scope and conflicts with variables from other libraries, and gives some c
                 div.style.cssText = 'width: 300px; height: 300px;'
             }
             if (img) {
-                img.style.cssText = 'width: 300px; height: 220px; border-radius: 10%;'
+                img.style.cssText = 'width: 300px; height: 220px;'
             }
             if (caption) {
                 caption.style.cssText = 'display: block; width: 100%; color: gray; letter-spacing: 1px; text-align: right; font-size: 15px; font-weight: 400;';
@@ -399,6 +376,9 @@ global scope and conflicts with variables from other libraries, and gives some c
         console.log('template masonry');
     },
 
+    /* 
+        Modify style for album template
+    */
     templateAlbum: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
@@ -413,7 +393,7 @@ global scope and conflicts with variables from other libraries, and gives some c
                 div.style.cssText = 'width: 350px; height: 300px;'
             }
             if (img) {
-                img.style.cssText = 'width: 300px; height: 220px; border-radius: 10%; float: left'
+                img.style.cssText = 'width: 300px; height: 220px; float: left'
             }
             if (caption) {
                 caption.style.cssText = 'display: block; color: gray; letter-spacing: 1px; text-align: right; font-size: 15px; font-weight: 400; float: left; writing-mode: vertical-rl; text-orientation: mixed; padding-left: 10px; padding-top: 20px';
@@ -425,13 +405,6 @@ global scope and conflicts with variables from other libraries, and gives some c
         console.log('template grid');
     }
 }
-
-	/* Can do all other library setup below without conflicting with the global namespace */
-	// ...
-	// ...
-
-	// After setup:
-	// Add the CircleGenerator to the window object if it doesn't already exist. 
 	global.GalleryGenerator = global.GalleryGenerator || GalleryGenerator
 
-})(window, window.document, $); // pass the global window object and jquery to the anonymous function. They will now be locally scoped inside of the function.
+})(window, window.document, $);

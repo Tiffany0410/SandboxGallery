@@ -10,7 +10,7 @@
 
    </head>
    <body>
-      <div class='header-container'>
+      <div class='header-container-api'>
          <div class='logo'>
             <h2>Sandbox Gallery API</h2>
          </div>
@@ -22,6 +22,79 @@
                 Demo
             </a>
          </div>
+      </div>
+      <div class='api-container'>
+        <div>
+            <h5>
+                <strong>
+                    Getting Started
+                </strong>
+            </h5>
+            <h5>
+                Scripts needed:
+                <em>
+                    jQuery, 
+                    sandboxGallery.js,
+                    sandboxGallery.css
+                </em>
+            </h5>
+        </div>
+        <div class='code-container'>
+            <span>
+                <em>
+                    There are 5 templates to choose from:
+                </em>
+                <br>
+                <code>
+                    template: {'default', 'mosaic', 'grid', 'masonry', 'album'}
+                </code>
+                <br>
+                <br>
+                <em>
+                    There are 5 hover effects to choose from:
+                </em>
+                <br>
+                <code>
+                    hover: {'shrink', 'grow', 'fade', 'border', 'blur'}
+                </code>
+                <br>
+                <br>
+                <em>
+                    Each image in a list contains information about name, path, caption and date as follow:
+                </em>
+                <br>
+                <code>
+                    photoList: [{name: "photo", path: 'photos/a.jpg', caption: 'Los Angeles', date: 'December 2018'},
+                </code>
+                <br>
+                <code>
+                    {name: "photo1", path: 'photos/a1.jpg', caption: 'Sunset and Tree', date: 'December 2018'}]
+                </code>
+                <br>
+                <br>
+                <em>
+                    To initialize a GalleryGenerator instance with default template, show caption and date, enable fullscreen viewing:
+                </em>
+                <br>
+                <code>
+                    const defaultGallery = new GalleryGenerator(template: 'default', photos: photoList, caption: true, 
+                </code>
+                <br>
+                <code>
+                    date: true, hover: 'shrink', fullscreen: true);
+                </code>
+                <br>
+                <br>
+                <em>
+                    To generate a sandbox gallery:
+                </em>
+                <br>
+                <code>
+                    default_gallery.makeGallery();
+                </code>
+            </span>
+            
+        </div>
       </div>
    </body>
 
