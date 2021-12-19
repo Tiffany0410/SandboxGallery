@@ -39,7 +39,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
         photos_container.id = "photos_container";
         gallery.id = 'sandboxgallery';
 
-        const modal = this.getModal();
+        const modal = this._getModal();
         const body = $('body');
         body.append(gallery);
         gallery.append(photos_container);
@@ -48,53 +48,53 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
         if (this.template === 'mosaic') {
             this.caption = false;
             this.date = false;
-            this.setImageMosaicMasonry(this.photos);
-            this.setCaptionorDate();
-            this.templateMosaic();
+            this._setImageMosaicMasonry(this.photos);
+            this._setCaptionorDate();
+            this._templateMosaic();
         }
         else if (this.template === 'grid') {
             this.caption = this.caption;
             this.date = this.date;
-            this.setImageDefaultGrid(this.photos);
-            this.setCaptionorDate();
-            this.templateGrid();
+            this._setImageDefaultGrid(this.photos);
+            this._setCaptionorDate();
+            this._templateGrid();
         }
         else if (this.template === 'masonry') {
             this.caption = false;
             this.date = false;
-            this.setImageMosaicMasonry(this.photos);
-            this.setCaptionorDate();
-            this.templateMasonry();
+            this._setImageMosaicMasonry(this.photos);
+            this._setCaptionorDate();
+            this._templateMasonry();
         }
         else if (this.template === 'album') {
             this.caption = this.caption;
             this.date = false;
-            this.setImageDefaultGrid(this.photos);
-            this.setCaptionorDate();
-            this.templateAlbum();
+            this._setImageDefaultGrid(this.photos);
+            this._setCaptionorDate();
+            this._templateAlbum();
         }
         else {
             this.caption = this.caption;
             this.date = this.date;
-            this.setImageDefaultGrid(this.photos);
-            this.setCaptionorDate();
-            this.templateDefault();
+            this._setImageDefaultGrid(this.photos);
+            this._setCaptionorDate();
+            this._templateDefault();
         }
     },
 
-    setCaptionorDate: function() {
+    _setCaptionorDate: function() {
         if (this.caption) {
-            this.showCaption();
+            this._showCaption();
         }
         if (this.date) {
-            this.showDate();
+            this._showDate();
         }
     },
 
     /* 
         Add images to gallery for default / grid template
     */
-    setImageDefaultGrid: function() {
+    _setImageDefaultGrid: function() {
         this.photos = this.photos;
         const gallery = document.getElementById('sandboxgallery');
 
@@ -122,7 +122,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
             }
             div.id = photo.name;
             div.className = 'default-card';
-            this.setHover(img);
+            this._setHover(img);
             img.id = photo.name + '_img';
             img.src = photo.path;
             div.style.cssText = 'width: 350px; height: 350px;'
@@ -136,7 +136,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Add images to gallery for mosaic / masonry template
     */
-    setImageMosaicMasonry: function() {
+    _setImageMosaicMasonry: function() {
         const cssStyle = [
             'grid-column: span 2; grid-row: 1 / 3;',
             'grid-column: span 2; grid-row: 1;',
@@ -205,7 +205,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
                 div.className = 'masonry_card';
             }
             div.id = photo.name;
-            this.setHover(img);
+            this._setHover(img);
             img.id = photo.name + '_img';
             img.src = photo.path;
             img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
@@ -218,7 +218,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Set hover effect for img
     */
-    setHover: function(img) {
+    _setHover: function(img) {
         if (this.hover === "shrink") {
             img.className = 'images-class-shrink';
         }
@@ -243,7 +243,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Add caption to gallery
     */
-    showCaption: function() {
+    _showCaption: function() {
         this.photos.map(photo => {
             const img_div = document.getElementById(photo.name);
             const caption = document.createElement('span');
@@ -256,7 +256,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Add date to gallery
     */
-    showDate: function() {
+    _showDate: function() {
         this.photos.map(photo => {
             const img_div = document.getElementById(photo.name);
             const date = document.createElement('span');
@@ -269,7 +269,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Generates a picture modal when user click on the picture
     */
-    getModal: function() {
+    _getModal: function() {
         const photo_modal = document.createElement('div');
         photo_modal.className = 'modal';
         photo_modal.id = 'modal';
@@ -296,7 +296,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Modify style for default template
     */
-    templateDefault: function() {
+    _templateDefault: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
         photos_container.style.cssText = 'width: 100%; height: 500px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; ';
@@ -325,7 +325,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Modify style for mosaic template
     */
-    templateMosaic: function() {
+    _templateMosaic: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
         photos_container.style.cssText = 'width: 100%; height: 100%; margin: auto;';
@@ -335,7 +335,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Modify style for grid template
     */
-    templateGrid: function() {
+    _templateGrid: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
         photos_container.style.cssText = 'width: 800px; display: flex; justify-content: space-between; flex-wrap: wrap; margin-left: auto; margin-right: auto;';
@@ -364,7 +364,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Modify style for masonry template
     */
-    templateMasonry: function() {
+    _templateMasonry: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
         photos_container.style.cssText = 'width: 100%; height: 100%; margin: auto;';
@@ -379,7 +379,7 @@ console.log('SCRIPT: Creating and loading Sandbox Gallery JS library');
     /* 
         Modify style for album template
     */
-    templateAlbum: function() {
+    _templateAlbum: function() {
         const gallery = document.getElementById('sandboxgallery');
         const photos_container = gallery.children[0];
         photos_container.style.cssText = 'width: 800px; display: flex; justify-content: space-between; flex-wrap: wrap; margin-left: auto; margin-right: auto;';
