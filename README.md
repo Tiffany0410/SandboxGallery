@@ -2,7 +2,7 @@
 
 _SandboxGallery is the tool of choice for developers to create beautiful galleries with eye-catching templates and hover effects for the web. Developers can take control over the gallery design, hover effects, enable fullscreen lightbox and show image title or date. There are various templates available: default, mosaic, grid, masonry and album. Also, there are different hover effects: shrink, grow, fade, border and blur._
 
-- Link to landing page: https://fathomless-depths-74822.herokuapp.com/examples.html
+- Link to landing page: https://sandboxgallery.onrender.com/examples.html
 
 ## _Getting Started_
 
@@ -32,4 +32,4 @@ Each image in a list contains information about name, path, caption and date as 
 
 ``default_gallery.makeGallery();``
 
-- Link to documentation: https://fathomless-depths-74822.herokuapp.com/api.html
+- Link to documentation: https://sandboxgallery.onrender.com/api.html
